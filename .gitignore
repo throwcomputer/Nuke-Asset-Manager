@@ -1,4 +1,3 @@
 *.pyc
-syntax: regexp
-/.hg$
-/.hgignore$
+.hg
+.hgignore
