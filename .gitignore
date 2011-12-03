@@ -1,0 +1,4 @@
+*.pyc
+syntax: regexp
+/.hg$
+/.hgignore$
