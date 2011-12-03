@@ -1,0 +1,46 @@
+#! C:/Program Files/Nuke6.3v2/Nuke6.3.exe -nx
+version 6.3 v2
+Gizmo {
+ note_font Arial
+ mapsize {0.15 0.15}
+ addUserKnob {20 User l Asset}
+ addUserKnob {4 type t "Choose the render type.\n\nOptions:\n\tanim - animatics\n\tcg - cg passes\n\tcomp - composites\n\tconcept - conceptual passes\n\tgrade - color grading\n\tmatte - matte/mask only\n\tplates - clean plates\n\troto - roto pass\n\tpass - alternative passes" M {anim cg comp concept grade matte plates roto pass "" "" "" "" "" "" "" "" ""}}
+ type comp
+ addUserKnob {3 version}
+ version 1
+ addUserKnob {1 description t "Granular details about the type/pass."}
+ addUserKnob {20 File}
+ addUserKnob {41 file_type l "file type" T Write1.file_type}
+ addUserKnob {41 Render T Write1.Render}
+}
+ Input {
+  inputs 0
+  name Input1
+  xpos -326
+  ypos -193
+ }
+ Write {
+  file "\[value dirName]/\[value fileName]/\[value fileName]_%04d.\[value file_type]"
+  proxy "\[value dirName]/\[value fileName]/\[value fileName]_proxy_%04d.\[value file_type]"
+  checkHashOnRead false
+  version 8
+  name Write1
+  xpos -326
+  ypos -83
+  addUserKnob {20 User}
+  addUserKnob {1 dirName}
+  dirName "\[python os.getenv('NKASSETS') + '/' + os.getenv('PROD') + '/' + os.getenv('SHOW') + '/scene' + os.getenv('SCENE') + '/shot' + os.getenv('SHOT') + '/' + nuke.thisParent().knob('type').value()]"
+  addUserKnob {1 fileName}
+  fileName "\[value parent.type]_\[value parent.description]_v\[format %02d \[value parent.version]]"
+ }
+ Output {
+  name Output1
+  xpos -326
+  ypos -15
+ }
+ Output {
+  name Output2
+  xpos -326
+  ypos 85
+ }
+end_group
