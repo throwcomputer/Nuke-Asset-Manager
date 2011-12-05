@@ -40,8 +40,13 @@ class assetManagerPanel( nukescripts.PythonPanel ):
         self.prodDict.sort()
         self.prodDict.append('Create New...')
         self.prod.setValues( self.prodDict )
-
+    
     def knobChanged( self, knob ):
+        new_parent = ''
+        
+        # Dropdown Change
+        if knob.Class() is 'Enumeration_Knob':
+            new_parent = knob.name()
         # Create New - toggle visibility
         if knob.value() == 'Create New...':
             self.prodNew.setVisible(True)
@@ -59,4 +64,6 @@ class assetManagerPanel( nukescripts.PythonPanel ):
             self.prodDict.append('Create New...')
             self.prod.setValues( self.prodDict )
             self.prod.setValue( txt )
+        print knob.name()
+        print new_parent
         
