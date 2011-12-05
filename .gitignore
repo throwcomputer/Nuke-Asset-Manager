@@ -1,3 +1,4 @@
 *.pyc
 .hg
 .hgignore
+environment.py

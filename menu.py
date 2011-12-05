@@ -1,2 +1,2 @@
-nuke.load("setup")
 nuke.load("manager")
+nuke.load("setup")

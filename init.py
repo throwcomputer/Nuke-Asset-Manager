@@ -7,3 +7,4 @@ def createOutDirs():
 		
 # GLOBAL CALLBACK ON RENDER TO CHECK/MAKE DIRS IF NOT EXISTANT
 nuke.addBeforeRender( createOutDirs, nodeClass='Write' )
+nuke.load('environment.py')

@@ -34,7 +34,7 @@ if myPanel.show():
 		f.closed
 		# Loads ENV file for Program startup
 		with open(init_filename, 'a') as f:
-			txt = "\nnuke.load('assetManagerEnv.py')"
+			txt = "\nnuke.load('environment.py')"
 			write_init = f.write(txt)
 		f.closed
 	if env_check:
