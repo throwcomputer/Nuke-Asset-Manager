@@ -37,6 +37,7 @@ class assetManagerPanel( nukescripts.PythonPanel ):
 
     def getData( self ):
         self.prodDict = os.listdir( os.environ['NKASSETS'] )
+        self.prodDict.sort()
         self.prodDict.append('Create New...')
         self.prod.setValues( self.prodDict )
 
@@ -48,11 +49,14 @@ class assetManagerPanel( nukescripts.PythonPanel ):
         if knob.value() != 'Create New...':
             self.prodNew.setVisible(False)
             self.prodCreate.setVisible(False)
-		# Create New - process
+        # Create New - process
         if knob.Class() in  ('PyScript_Knob', 'String_Knob'):
             numvals = self.prod.numValues()
             txt = self.prodNew.value()
-            self.prodDict.insert(numvals-1, txt)
+            self.prodDict.append( txt )
+            self.prodDict.remove('Create New...')
+            self.prodDict.sort()
+            self.prodDict.append('Create New...')
             self.prod.setValues( self.prodDict )
             self.prod.setValue( txt )
         
