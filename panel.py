@@ -32,16 +32,25 @@ class assetManagerPanel( nukescripts.PythonPanel ):
         for d in dictionaries:
             # create blank lists for each dictionary
             self.d = []
-        
         self.getData()
 
     def getData( self ):
         self.prodDict = os.listdir( os.environ['NKASSETS'] )
         self.prodDict.sort()
+        self.showDict = {}
+        self.sceneDict = {}
+        self.shotDict = {}
+        for x in self.prodDict:
+            self.showDict[ x ] = os.listdir( os.environ['NKASSETS'] + '/' + x )
+            for y in self.showDict:
+                self.sceneDict[ y ] = os.listdir( os.environ['NKASSETS'] + '/' + x + '/' + y )
         self.prodDict.append('Create New...')
         self.prod.setValues( self.prodDict )
-    
+   
     def knobChanged( self, knob ):
+        self.show.setValues( self.showDict[ self.prod.value() ] )
+        self.scene.setValues( self.sceneDict[ self.show.value() ] )
+        #self.shot.setValues( self.shotDict[ self.scene.value() ] )
         new_parent = ''
         
         # Dropdown Change
